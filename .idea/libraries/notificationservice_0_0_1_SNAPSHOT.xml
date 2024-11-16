@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="notificationservice-0.0.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/notificationservice/target/notificationservice-0.0.1-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
