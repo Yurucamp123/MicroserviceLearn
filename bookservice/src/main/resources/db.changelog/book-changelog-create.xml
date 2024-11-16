@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd"
+>
+    <changeSet id="create-token-entry-table" author="lethanhbinh">
+        <createTable tableName="token_entry">
+            <column name="processor_name" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="segment" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="token" type="BLOB"/>
+            <column name="timestamp" type="VARCHAR(255)"/>
+            <column name="owner" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-token-type-column" author="lethanhbinh">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="token_entry" columnName="token_type"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="token_entry">
+            <column name="token_type" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <!--    Table Book       -->
+    <changeSet id="create-table-book" author="lethanhbinh">
+        <preConditions onFail="CONTINUE" onFailMessage="Table has been existed">
+            <not>
+                <tableExists tableName="books"/>
+            </not>
+        </preConditions>
+        <createTable tableName="books">
+            <column name="bookId" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="table-book-add-column-author" author="lethanhbinh">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="books" columnName="author"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="books">
+            <column name="author" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="table-book-add-column-isReady" author="lethanhbinh">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="books" columnName="isReady"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="books">
+            <column name="isReady" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="table-book-add-column-name" author="lethanhbinh">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="books" columnName="name"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="books">
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>
